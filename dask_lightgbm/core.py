@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import dask.array as da
 import dask.dataframe as dd
+from h2oaicore.lightgbm_dynamic import got_cpu_lgb, got_gpu_lgb
 import lightgbm
 import numpy as np
 import pandas as pd
@@ -119,7 +120,8 @@ def train(client, data, label, params, model_factory, weight=None, **kwargs):
     # Tell each worker to train on the parts that it has locally
     futures_classifiers = [client.submit(_train_part,
                                          model_factory=model_factory,
-                                         params=assoc(params, 'num_threads', worker_ncores[worker]),
+                                         #params=assoc(params, 'num_threads', worker_ncores[worker]),
+                                         params=params,
                                          list_of_parts=list_of_parts,
                                          worker_addresses=list(worker_map.keys()),
                                          local_listen_port=params.get('local_listen_port', 12400),

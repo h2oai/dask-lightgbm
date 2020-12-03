@@ -1,5 +1,6 @@
 import dask.array as da
 import dask.dataframe as dd
+from h2oaicore.lightgbm_dynamic import got_cpu_lgb, got_gpu_lgb
 import lightgbm
 import numpy as np
 import pandas as pd
