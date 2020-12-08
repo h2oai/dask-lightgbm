@@ -145,8 +145,11 @@ def _predict_part(part, model, proba, **kwargs):
     else:
         result = model.predict(data, **kwargs)
 
+    if result.shape[0] != data.shape[0]:
+        raise RuntimeError("result rows don't match: %s %s" % (result.shape[0], data.shape[0]))
+
     if isinstance(part, pd.DataFrame):
-        if proba:
+        if proba or kwargs.get('pred_contrib', False):
             result = pd.DataFrame(result, index=part.index)
         else:
             result = pd.Series(result, index=part.index, name='predictions')
