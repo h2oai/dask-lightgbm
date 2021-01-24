@@ -14,4 +14,4 @@ system-test:
 	@DOCKER_TAG=${DOCKER_TAG} docker-compose up --abort-on-container-exit
 
 publish: clean
-	@poetry publish --build --dry-run
+	@poetry publish --build --dry-run -u nobody -p nothing
