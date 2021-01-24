@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import dask.array as da
 import dask.dataframe as dd
+os.environ['USE_ORIG_LGBM'] = "1"
 from h2oaicore.lightgbm_dynamic import got_cpu_lgb, got_gpu_lgb
 import lightgbm
 import numpy as np
